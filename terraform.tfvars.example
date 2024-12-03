@@ -1,0 +1,14 @@
+# Hetzner Cloud API token (required)
+hcloud_token = "your_hetzner_cloud_token"
+
+# SSH key paths
+ssh_public_key_path  = "~/.ssh/id_rsa.pub"
+ssh_private_key_path = "~/.ssh/id_rsa"
+
+# Cluster configuration (optional, these are the defaults)
+cluster_name   = "docker-swarm"
+location       = "nbg1"
+manager_count  = 2
+worker_count   = 3
+server_type    = "cx22"
+os_image       = "ubuntu-24.04"
