@@ -1,14 +1,18 @@
-# Hetzner Cloud API token (required)
-hcloud_token = "your_hetzner_cloud_token"
+# Example configuration for Terraform variables
 
-# SSH key paths
-ssh_public_key_path  = "~/.ssh/id_rsa.pub"
+# Hetzner Cloud token
+hcloud_token = "your-hetzner-cloud-token"
+
+# SSH configuration
 ssh_private_key_path = "~/.ssh/id_rsa"
+ssh_public_key_path = "~/.ssh/id_rsa.pub"
 
-# Cluster configuration (optional, these are the defaults)
-cluster_name   = "docker-swarm"
-location       = "nbg1"
-manager_count  = 2
-worker_count   = 3
-server_type    = "cx22"
-os_image       = "ubuntu-24.04"
+# Cluster configuration
+cluster_name     = "my-swarm-cluster"
+manager_count    = 2  # Recommended to have odd number of managers
+worker_count     = 3
+manager_server_type = "cx22"  # 2 vCPU, 4GB RAM
+worker_server_type  = "cx22"  # 2 vCPU, 4GB RAM
+
+# Location
+location = "nbg1"  # Nuremberg, Germany

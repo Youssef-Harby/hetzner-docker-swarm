@@ -2,7 +2,7 @@
 resource "hcloud_server" "swarm_managers" {
   count       = var.manager_count
   name        = "${var.cluster_name}-manager-${count.index + 1}"
-  server_type = var.server_type
+  server_type = var.manager_server_type
   location    = var.location
   image       = var.os_image
   ssh_keys    = [hcloud_ssh_key.swarm_ssh_key.id]
@@ -54,7 +54,7 @@ resource "hcloud_server_network" "swarm_manager_networks" {
 resource "hcloud_server" "swarm_workers" {
   count       = var.worker_count
   name        = "${var.cluster_name}-worker-${count.index + 1}"
-  server_type = var.server_type
+  server_type = var.worker_server_type
   location    = var.location
   image       = var.os_image
   ssh_keys    = [hcloud_ssh_key.swarm_ssh_key.id]
@@ -145,9 +145,15 @@ resource "null_resource" "additional_managers" {
     inline = [
       # Wait for Docker to be ready
       "while ! docker info > /dev/null 2>&1; do sleep 1; done",
+      # Create .ssh directory and copy private key
+      "mkdir -p ~/.ssh",
+      "echo '${file(var.ssh_private_key_path)}' > ~/.ssh/swarm_key",
+      "chmod 600 ~/.ssh/swarm_key",
       # Get manager token and join the swarm using private IP
-      "TOKEN=$(ssh -o StrictHostKeyChecking=no -i ${var.ssh_private_key_path} root@${hcloud_server.swarm_managers[0].ipv4_address} 'cat /root/manager-token')",
-      "docker swarm join --token $TOKEN ${hcloud_server_network.swarm_manager_networks[0].ip}:2377"
+      "TOKEN=$(ssh -o StrictHostKeyChecking=no -i ~/.ssh/swarm_key root@${hcloud_server.swarm_managers[0].ipv4_address} 'cat /root/manager-token')",
+      "docker swarm join --token $TOKEN ${hcloud_server_network.swarm_manager_networks[0].ip}:2377",
+      # Clean up
+      "rm ~/.ssh/swarm_key"
     ]
   }
 }

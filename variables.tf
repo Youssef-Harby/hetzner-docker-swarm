@@ -28,10 +28,16 @@ variable "worker_count" {
   default     = 2
 }
 
-variable "server_type" {
-  description = "Hetzner server type for nodes"
+variable "manager_server_type" {
+  description = "Server type for manager nodes"
   type        = string
-  default     = "cx22"  # 2 vCPU, 4GB RAM
+  default     = "cx22"
+}
+
+variable "worker_server_type" {
+  description = "Server type for worker nodes"
+  type        = string
+  default     = "cx22"
 }
 
 variable "os_image" {

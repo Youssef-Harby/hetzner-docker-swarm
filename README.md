@@ -18,7 +18,8 @@ Customize the deployment by modifying `variables.tf`:
 - `location`: Hetzner Cloud location (default: "fsn1")
 - `manager_count`: Number of manager nodes (default: 3)
 - `worker_count`: Number of worker nodes (default: 2)
-- `server_type`: Server type (default: "cx22")
+- `manager_server_type`: Server type for manager nodes (default: "cx22")
+- `worker_server_type`: Server type for worker nodes (default: "cx22")
 - `ssh_public_key_path`: Path to SSH public key
 - `ssh_private_key_path`: Path to SSH private key
 
