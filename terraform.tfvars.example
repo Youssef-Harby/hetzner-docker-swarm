@@ -1,18 +1,22 @@
 # Example configuration for Terraform variables
 
-# Hetzner Cloud token
-hcloud_token = "your-hetzner-cloud-token"
+# Hetzner Cloud API Token
+hcloud_token = "your_hcloud_token"
 
-# SSH configuration
+# SSH Keys
 ssh_private_key_path = "~/.ssh/id_rsa"
-ssh_public_key_path = "~/.ssh/id_rsa.pub"
+ssh_public_key_path  = "~/.ssh/id_rsa.pub"
 
-# Cluster configuration
-cluster_name     = "my-swarm-cluster"
-manager_count    = 2  # Recommended to have odd number of managers
-worker_count     = 3
-manager_server_type = "cx22"  # 2 vCPU, 4GB RAM
-worker_server_type  = "cx22"  # 2 vCPU, 4GB RAM
+# Cluster Configuration
+cluster_name  = "swarm-cluster"
+location      = "nbg1"
+manager_count = 3
+worker_count  = 2
+manager_type  = "cx21"
+worker_type   = "cx21"
 
-# Location
-location = "nbg1"  # Nuremberg, Germany
+# Portainer Configuration
+portainer_password = "change_this_password"
+
+# CSI Plugin Configuration
+csi_plugin_version = "latest"

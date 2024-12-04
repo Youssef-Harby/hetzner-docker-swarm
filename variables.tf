@@ -61,3 +61,15 @@ variable "network_zone" {
   type        = string
   default     = "eu-central"
 }
+
+variable "portainer_password" {
+  description = "Admin password for Portainer"
+  type        = string
+  sensitive   = true
+}
+
+variable "csi_plugin_version" {
+  description = "Version of the Hetzner CSI plugin to install"
+  type        = string
+  default     = "latest"
+}

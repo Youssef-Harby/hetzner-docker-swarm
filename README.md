@@ -56,7 +56,7 @@ terraform apply
 - Outputs for cluster information
 
 ## Accessing Portainer
-After deployment, Portainer will be available at `http://<manager-node-ip>:9000`. 
+After deployment, Portainer will be available at `http://<manager-node-ip>:9443`. 
 
 1. On first access, create an admin user
 2. Choose "Docker Swarm" environment

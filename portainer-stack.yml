@@ -1,0 +1,28 @@
+services:
+  portainer:
+    image: portainer/portainer-ce:latest
+    command: -H unix:///var/run/docker.sock
+    ports:
+      - "9443:9443"
+      - "8000:8000"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - type: cluster
+        source: portainer_data
+        target: /data
+    deploy:
+      mode: replicated
+      replicas: 1
+      placement:
+        constraints:
+          - node.role == manager
+
+volumes:
+  portainer_data:
+    driver: hetznercloud/hcloud-csi-driver:latest-swarm
+    driver_opts:
+      required-bytes: "10G"
+      type: mount
+      sharing: onewriter
+      scope: single
+      topology-required: "csi.hetzner.cloud/location=nbg1"

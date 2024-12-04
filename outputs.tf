@@ -36,6 +36,6 @@ output "swarm_manager_primary_ip" {
 
 # Portainer URL
 output "portainer_url" {
-  value       = "http://${hcloud_server.swarm_managers[0].ipv4_address}:9000"
+  value       = "http://${hcloud_server.swarm_managers[0].ipv4_address}:9443"
   description = "URL to access Portainer web interface"
 }

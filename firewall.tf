@@ -54,7 +54,7 @@ resource "hcloud_firewall" "swarm_firewall" {
   rule {
     direction = "in"
     protocol  = "tcp"
-    port      = "9000"
+    port      = "9443"
     source_ips = [
       "0.0.0.0/0",
       "::/0"
